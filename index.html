@@ -2,38 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Chetna babu ❤️</title>
+  <title>Be My Valentine 💖</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ffd6e8, #ffeef6);
-      font-family: "Poppins", sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      overflow: hidden;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef6);
+      font-family: Poppins, Arial, sans-serif;
     }
 
     .card {
       background: white;
-      padding: 40px 50px;
+      padding: 40px;
       border-radius: 20px;
+      text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      width: 350px;
+      width: 340px;
       position: relative;
     }
 
     .emoji {
       font-size: 70px;
-      margin-bottom: 20px;
     }
 
     h2 {
-      margin-bottom: 30px;
-      font-weight: 600;
+      margin: 20px 0 30px;
     }
 
     .buttons {
@@ -42,7 +38,7 @@
     }
 
     button {
-      padding: 12px 28px;
+      padding: 12px 26px;
       font-size: 16px;
       border-radius: 25px;
       border: none;
@@ -51,15 +47,14 @@
       transition: 0.3s;
     }
 
-    #yesBtn {
+    #yes {
       background: #ff4d6d;
       color: white;
-      left: 50px;
+      left: 40px;
     }
 
-    #noBtn {
+    #no {
       background: #ddd;
-      color: #333;
       left: 180px;
     }
 
@@ -76,60 +71,40 @@
 </head>
 <body>
 
-  <div class="card">
-    <div class="emoji">🐱💖</div>
-    <h2>Chetna babu, will you be my Valentine?</h2>
+<div class="card">
+  <div class="emoji">🐱💖</div>
+  <h2>Nirali, will you be my Valentine?</h2>
 
-    <div class="buttons">
-      <button id="yesBtn">Yes</button>
-      <button id="noBtn">No</button>
-    </div>
-
-    <div id="surprise">
-      <h3>Yaaay! 🎉💘</h3>
-      <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Surprise" />
-    </div>
+  <div class="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
   </div>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const surprise = document.getElementById("surprise");
+  <div id="surprise">
+    <h3>Yaaay! 🎉💘</h3>
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+  </div>
+</div>
 
-    noBtn.addEventListener("mouseover", moveNo);
-    noBtn.addEventListener("touchstart", moveNo); // for mobile touch
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const surprise = document.getElementById("surprise");
 
-    function moveNo() {
-      const yesRect = yesBtn.getBoundingClientRect();
-      const noRect = noBtn.getBoundingClientRect();
+  function moveNo() {
+    noBtn.style.left = Math.random() * 140 + "px";
+    noBtn.style.top = Math.random() * 20 + "px";
+  }
 
-      // Random position
-      let x = Math.random() * (window.innerWidth - noRect.width);
-      let y = Math.random() * (window.innerHeight - noRect.height);
+  noBtn.addEventListener("mouseover", moveNo);
+  noBtn.addEventListener("click", moveNo);
 
-      const dx = x - yesRect.left;
-      const dy = y - yesRect.top;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      // If too close to Yes → push No away
-      if (distance < 150) {
-        x += dx > 0 ? 150 : -150;
-        y += dy > 0 ? 150 : -150;
-      }
-
-      // Keep No inside screen
-      x = Math.max(10, Math.min(x, window.innerWidth - noRect.width - 10));
-      y = Math.max(10, Math.min(y, window.innerHeight - noRect.height - 10));
-
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    }
-
-    yesBtn.addEventListener("click", () => {
-      document.querySelector(".buttons").style.display = "none";
-      surprise.style.display = "block";
-    });
-  </script>
+  yesBtn.addEventListener("click", () => {
+    surprise.style.display = "block";
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+  });
+</script>
 
 </body>
 </html>
