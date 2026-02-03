@@ -1,112 +1,120 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Be My Valentine 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Chetna babu ❤️</title>
+
   <style>
     body {
       margin: 0;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ffd6e8, #ffeef6);
-      font-family: Poppins, Arial, sans-serif;
-    }
-
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      width: 340px;
-      position: relative;
+      color: white;
     }
 
-    .emoji {
-      font-size: 70px;
-    }
-
-    h2 {
-      margin: 20px 0 30px;
+    h1 {
+      margin-top: 80px;
+      font-size: 2.2rem;
     }
 
     .buttons {
       position: relative;
-      height: 60px;
+      width: 100%;
+      height: 60vh;
     }
 
     button {
-      padding: 12px 26px;
-      font-size: 16px;
-      border-radius: 25px;
+      padding: 14px 30px;
+      font-size: 18px;
       border: none;
+      border-radius: 30px;
       cursor: pointer;
       position: absolute;
-      transition: 0.3s;
+      transition: 0.2s;
     }
 
     #yes {
-      background: #ff4d6d;
+      background: #28a745;
       color: white;
-      left: 40px;
+      left: 50%;
+      top: 55%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
     }
 
     #no {
-      background: #ddd;
-      left: 180px;
+      background: #dc3545;
+      color: white;
+      left: 30%;
+      top: 65%;
     }
 
-    #surprise {
+    #message {
       display: none;
-      margin-top: 25px;
-    }
-
-    #surprise img {
-      width: 200px;
-      border-radius: 15px;
+      font-size: 2rem;
+      margin-top: 40px;
     }
   </style>
 </head>
+
 <body>
 
-<div class="card">
-  <div class="emoji">🐱💖</div>
-  <h2>Chetna babu, will you be my Valentine?</h2>
+  <h1>Chetna babu ❤️  
+    <br>Will you be my Valentine? 💖
+  </h1>
 
   <div class="buttons">
-    <button id="yes">Yes</button>
-    <button id="no">No</button>
+    <button id="yes">Yes 😍</button>
+    <button id="no">No 🙄</button>
   </div>
 
-  <div id="surprise">
-    <h3>Yaaay! 🎉💘</h3>
-    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+  <div id="message">
+    Yayyy!! 💃💖  
+    <br>You made me the happiest! 🥰
   </div>
-</div>
 
-<script>
-  const noBtn = document.getElementById("no");
-  const yesBtn = document.getElementById("yes");
-  const surprise = document.getElementById("surprise");
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const message = document.getElementById("message");
 
-  function moveNo() {
-    noBtn.style.left = Math.random() * 140 + "px";
-    noBtn.style.top = Math.random() * 20 + "px";
-  }
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
 
-  noBtn.addEventListener("mouseover", moveNo);
-  noBtn.addEventListener("click", moveNo);
+    function moveNo() {
+      const yesRect = yesBtn.getBoundingClientRect();
+      const noRect = noBtn.getBoundingClientRect();
 
-  yesBtn.addEventListener("click", () => {
-    surprise.style.display = "block";
-    yesBtn.style.display = "none";
-    noBtn.style.display = "none";
-  });
-</script>
+      let x = Math.random() * (window.innerWidth - noRect.width);
+      let y = Math.random() * (window.innerHeight - noRect.height);
+
+      const dx = x - yesRect.left;
+      const dy = y - yesRect.top;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // If No comes too close to Yes → push it away
+      if (distance < 150) {
+        x += dx > 0 ? 150 : -150;
+        y += dy > 0 ? 150 : -150;
+      }
+
+      // Keep No inside screen
+      x = Math.max(10, Math.min(x, window.innerWidth - noRect.width - 10));
+      y = Math.max(10, Math.min(y, window.innerHeight - noRect.height - 10));
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    yesBtn.addEventListener("click", () => {
+      document.querySelector(".buttons").style.display = "none";
+      message.style.display = "block";
+    });
+  </script>
 
 </body>
 </html>
