@@ -2,93 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Chetna babu ❤️</title>
-
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      font-family: Arial, Helvetica, sans-serif;
-      overflow: hidden;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef6);
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      color: white;
+      overflow: hidden;
     }
 
-    h1 {
-      margin-top: 80px;
-      font-size: 2.2rem;
+    .card {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      width: 350px;
+      position: relative;
+    }
+
+    .emoji {
+      font-size: 70px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      font-weight: 600;
     }
 
     .buttons {
       position: relative;
-      width: 100%;
-      height: 60vh;
+      height: 60px;
     }
 
     button {
-      padding: 14px 30px;
-      font-size: 18px;
+      padding: 12px 28px;
+      font-size: 16px;
+      border-radius: 25px;
       border: none;
-      border-radius: 30px;
       cursor: pointer;
       position: absolute;
-      transition: 0.2s;
+      transition: 0.3s;
     }
 
-    #yes {
-      background: #28a745;
+    #yesBtn {
+      background: #ff4d6d;
       color: white;
-      left: 50%;
-      top: 55%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      left: 50px;
     }
 
-    #no {
-      background: #dc3545;
-      color: white;
-      left: 30%;
-      top: 65%;
+    #noBtn {
+      background: #ddd;
+      color: #333;
+      left: 180px;
     }
 
-    #message {
+    #surprise {
       display: none;
-      font-size: 2rem;
-      margin-top: 40px;
+      margin-top: 25px;
+    }
+
+    #surprise img {
+      width: 200px;
+      border-radius: 15px;
     }
   </style>
 </head>
-
 <body>
 
-  <h1>Chetna babu ❤️  
-    <br>Will you be my Valentine? 💖
-  </h1>
+  <div class="card">
+    <div class="emoji">🐱💖</div>
+    <h2>Chetna babu, will you be my Valentine?</h2>
 
-  <div class="buttons">
-    <button id="yes">Yes 😍</button>
-    <button id="no">No 🙄</button>
-  </div>
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
 
-  <div id="message">
-    Yayyy!! 💃💖  
-    <br>You made me the happiest! 🥰
+    <div id="surprise">
+      <h3>Yaaay! 🎉💘</h3>
+      <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Surprise" />
+    </div>
   </div>
 
   <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const message = document.getElementById("message");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const surprise = document.getElementById("surprise");
 
     noBtn.addEventListener("mouseover", moveNo);
-    noBtn.addEventListener("touchstart", moveNo);
+    noBtn.addEventListener("touchstart", moveNo); // for mobile touch
 
     function moveNo() {
       const yesRect = yesBtn.getBoundingClientRect();
       const noRect = noBtn.getBoundingClientRect();
 
+      // Random position
       let x = Math.random() * (window.innerWidth - noRect.width);
       let y = Math.random() * (window.innerHeight - noRect.height);
 
@@ -96,7 +111,7 @@
       const dy = y - yesRect.top;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      // If No comes too close to Yes → push it away
+      // If too close to Yes → push No away
       if (distance < 150) {
         x += dx > 0 ? 150 : -150;
         y += dy > 0 ? 150 : -150;
@@ -112,7 +127,7 @@
 
     yesBtn.addEventListener("click", () => {
       document.querySelector(".buttons").style.display = "none";
-      message.style.display = "block";
+      surprise.style.display = "block";
     });
   </script>
 
